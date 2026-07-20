@@ -1,0 +1,24 @@
+services:
+  ros2_practice:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    image: ros2_practice:jazzy
+    container_name: ros2_practice
+    environment:
+      - DISPLAY=${DISPLAY}
+      - QT_X11_NO_MITSHM=1
+      - LIBGL_ALWAYS_SOFTWARE=1
+    volumes:
+      # Bind-mount the workspace so edits made in the container (or from your
+      # host editor) persist and survive `docker compose down`.
+      - ./ros2_ws:/root/ros2_ws
+      # X11 socket, for turtlesim / rviz / rqt windows. See README.md "GUI notes"
+      # for the macOS / Windows equivalents.
+      - /tmp/.X11-unix:/tmp/.X11-unix:rw
+    # host networking makes ROS 2's DDS discovery "just work" without extra
+    # config. Only reliable on Linux hosts; see README.md if you're on
+    # macOS/Windows.
+    network_mode: host
+    stdin_open: true
+    tty: true
