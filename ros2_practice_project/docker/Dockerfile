@@ -1,6 +1,6 @@
 # ROS 2 Jazzy Jalisco (LTS, supported until 2029) on Ubuntu 24.04.
 # "desktop-full" already includes turtlesim, rviz2, rqt, and the demo nodes.
-FROM osrf/ros:jazzy-desktop-full
+FROM osrf/ros:jazzy-desktop-full AS ros_basic
 
 ENV DEBIAN_FRONTEND=noninteractive
 
@@ -11,9 +11,6 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     python3-vcstool \
     build-essential \
     cmake \
-    git \
-    nano \
-    vim \
     && rm -rf /var/lib/apt/lists/*
 
 # rosdep is already initialized on the base image in most cases; guard against
@@ -31,5 +28,15 @@ RUN echo "source /opt/ros/jazzy/setup.bash" >> /root/.bashrc && \
     echo "if [ -f ${ROS_WS}/install/setup.bash ]; then source ${ROS_WS}/install/setup.bash; fi" >> /root/.bashrc
 
 ENV DEBIAN_FRONTEND=
+
+
+FROM ros_basic as tooling
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    git \
+    nano \
+    vim \
+    tmux \
+    && rm -rf /var/lib/apt/lists/*
 
 CMD ["bash"]
