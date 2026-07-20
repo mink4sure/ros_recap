@@ -54,22 +54,22 @@ Docker setup and the empty `ros2_ws/src/` directory are provided.
 ## Module 0 — Environment & CLI warm-up (~30–45 min)
 
 **0.1 — Sanity-check the container**
-- [ ] Build the image and start the container (see `README.md`).
-- [ ] Inside the container, confirm ROS 2 is sourced: `printenv ROS_DISTRO`
+- [x] Build the image and start the container (see `README.md`).
+- [x] Inside the container, confirm ROS 2 is sourced: `printenv ROS_DISTRO`
       should print `jazzy`.
-- [ ] Run `ros2 doctor --report` and skim the output for anything alarming.
-- [ ] Run `ros2 pkg list | grep turtlesim` to confirm turtlesim is installed.
+- [x] Run `ros2 doctor --report` and skim the output for anything alarming.
+- [x] Run `ros2 pkg list | grep turtlesim` to confirm turtlesim is installed.
 
 **0.2 — Create the colcon workspace**
-- [ ] Confirm `ros2_ws/src/` exists (it's already mounted into the
+- [x] Confirm `ros2_ws/src/` exists (it's already mounted into the
       container).
-- [ ] From `ros2_ws/`, run `colcon build`. It should succeed even with an
+- [x] From `ros2_ws/`, run `colcon build`. It should succeed even with an
       empty `src/` (colcon just builds nothing).
-- [ ] `source install/setup.bash` and confirm no errors.
+- [x] `source install/setup.bash` and confirm no errors.
 
 **0.3 — CLI muscle memory with turtlesim**
-- [ ] Launch `ros2 run turtlesim turtlesim_node`.
-- [ ] In another shell in the same container (`docker compose exec
+- [x] Launch `ros2 run turtlesim turtlesim_node`.
+- [x] In another shell in the same container (`docker compose exec
       ros2_practice bash`), run:
   - `ros2 node list`, `ros2 node info /turtlesim`
   - `ros2 topic list`, `ros2 topic info /turtle1/cmd_vel`, `ros2 topic echo
