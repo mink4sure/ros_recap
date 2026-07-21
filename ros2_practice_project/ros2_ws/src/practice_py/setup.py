@@ -24,6 +24,8 @@ setup(
     },
     entry_points={
         'console_scripts': [
-        ],
+            'talker = practice_py.talker:main',
+            'listener = practice_py.listener:main',
+        ]
     },
 )
